@@ -12,16 +12,18 @@ class DockingStation
   end
 
   def release_bike
-    # This is dubious on separation of concerns and simplicity
-    working_bikes = @bikes.reject { |bike| bike.broken? }
-    fail 'No bikes available' if working_bikes.empty?
-    working_bikes.pop
+    # This is dubious on separation of concerns
+    # Reworked method that removes the bike when it releases it
+    bike = @bikes.find { |bike| !bike.broken? }
+    fail 'No bikes available' if bike == nil
+    @bikes.delete(bike)
   end
 
   def release_broken
-    broken_bikes = @bikes.select { |bike| bike.broken? }
-    fail 'No bikes available' if broken_bikes.empty?
-    broken_bikes.pop
+    # Reworked method that removes the bike when it releases it
+    bike = @bikes.find { |bike| bike.broken? }
+    fail 'No bikes available' if bike == nil
+    @bikes.delete(bike)
   end
 
   def dock(bike)
