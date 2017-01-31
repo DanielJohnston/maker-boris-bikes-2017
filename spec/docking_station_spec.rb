@@ -75,4 +75,14 @@ describe DockingStation do
     end
   end
 
+  # vans collect broken bikes
+  describe '#release_broken' do
+    let(:bike) { double :bike }
+    it 'releases a broken bike on request' do
+      allow(bike).to receive(:broken?).and_return(true)
+      subject.dock(bike)
+      expect(subject.release_broken).to be_broken
+    end
+  end
+
 end

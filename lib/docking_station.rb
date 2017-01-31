@@ -18,6 +18,12 @@ class DockingStation
     working_bikes.pop
   end
 
+  def release_broken
+    broken_bikes = @bikes.select { |bike| bike.broken? }
+    fail 'No bikes available' if broken_bikes.empty?
+    broken_bikes.pop
+  end
+
   def dock(bike)
     fail 'Docking station full' if full?
     @bikes << bike
