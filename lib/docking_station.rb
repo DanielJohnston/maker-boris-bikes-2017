@@ -15,19 +15,19 @@ class DockingStation
     # This is dubious on separation of concerns
     # Reworked method that removes the bike when it releases it
     bike = @bikes.find { |bike| !bike.broken? }
-    fail 'No bikes available' if bike == nil
+    raise 'No bikes available' if bike.nil?
     @bikes.delete(bike)
   end
 
   def release_broken
     # Reworked method that removes the bike when it releases it
-    bike = @bikes.find { |bike| bike.broken? }
-    fail 'No bikes available' if bike == nil
+    bike = @bikes.find(&:broken?)
+    raise 'No bikes available' if bike.nil?
     @bikes.delete(bike)
   end
 
   def dock(bike)
-    fail 'Docking station full' if full?
+    raise 'Docking station full' if full?
     @bikes << bike
   end
 
@@ -40,5 +40,4 @@ class DockingStation
   def full?
     @bikes.count >= capacity
   end
-
 end
