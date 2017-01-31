@@ -9,8 +9,4 @@ describe Van do
     subject.collect_bike_from(docking_station)
     expect(subject.bikes).to eq [bike]
   end
-
-  it 'does not collect a working bike from a docking station' do
-    # THIS IS A TEST ON FUNCTIONING OF THE DOCKING STATION
-  end
 end
